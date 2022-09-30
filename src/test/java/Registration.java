@@ -107,10 +107,11 @@ public class Registration{
     }
     @Test
     public void findMovies(){
-        List<WebElement> movies = driver.findElements(By.xpath("//h2[@id='anchor-Movies']/../../..//div[@class='swiper-wrapper']//a"));
+        List<WebElement> movies = driver.findElements(By.xpath("//h2[@id='anchor-Movies']/../../..//div[@class='swiper-wrapper']//a//div"));
         for (WebElement e : movies) {
             System.out.println(e.getAttribute("id"));
         }
     }
+
 
 }
