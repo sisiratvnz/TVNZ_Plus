@@ -81,7 +81,7 @@ public class Registration{
     }
     @Test
     public void logIn() throws InterruptedException {
-        Thread.sleep(3000);
+//        Thread.sleep(3000);
         driver.findElement(By.xpath("//a[text()='Login']")).click();
 //        Assertions.assertTrue(driver.findElement(By.xpath("//a[text()='Login']")).isDisplayed(),"Login button not available");
 //        Thread.sleep(3000);
@@ -90,21 +90,21 @@ public class Registration{
         driver.findElement(By.xpath("//span[.='Login']/..")).click();
     }
 
-//    @Test
-//    public void findCategories(){
-//        driver.findElement(By.xpath("//li[@id='Categories']")).click();
-//        List<WebElement> categories = driver.findElements(By.xpath("//li[@id='Categories']//li//a"));
-//        for (WebElement e : categories) {
-//            System.out.println(e.getAttribute("text"));
-//        }
-//    }
-//    @Test
-//    public void findTopPicks(){
-//        List<WebElement> topPicks = driver.findElements(By.xpath("//h2[@id='anchor-TopPicks']/../../..//div[@class='swiper-wrapper']//a/div"));
-//        for (WebElement e : topPicks) {
-//            System.out.println(e.getAttribute("id"));
-//        }
-//    }
+    @Test
+    public void findCategories(){
+        driver.findElement(By.xpath("//li[@id='Categories']")).click();
+        List<WebElement> categories = driver.findElements(By.xpath("//li[@id='Categories']//li//a"));
+        for (WebElement e : categories) {
+            System.out.println(e.getAttribute("text"));
+        }
+    }
+    @Test
+    public void findTopPicks(){
+        List<WebElement> topPicks = driver.findElements(By.xpath("//h2[@id='anchor-TopPicks']/../../..//div[@class='swiper-wrapper']//a/div"));
+        for (WebElement e : topPicks) {
+            System.out.println(e.getAttribute("id"));
+        }
+    }
     @Test
     public void findMovies(){
         List<WebElement> movies = driver.findElements(By.xpath("//h2[@id='anchor-Movies']/../../..//div[@class='swiper-wrapper']//a"));
