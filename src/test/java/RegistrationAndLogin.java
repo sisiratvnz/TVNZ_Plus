@@ -1,23 +1,14 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.*;
 
-import javax.swing.text.Element;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class Registration{
+public class RegistrationAndLogin extends ConnectDriver {
 
-    WebDriver driver = null;
+
     static String email = null;
     static String password = null;
 
@@ -41,21 +32,6 @@ public class Registration{
         return genders.get((int)(Math.random() * genders.size()));
     }
 
-    @BeforeEach
-    public void connectDriver(){
-        WebDriverManager.chromedriver().setup();
-        driver= new ChromeDriver();
-        driver.navigate().to("https://stage.tvnz-stage.co.nz/");
-        driver.manage().window().fullscreen();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        //driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        System.out.println("Site loading successful....");
-    }
-    @AfterEach
-    public void closeDriver(){
-        driver.close();
-        driver.quit();
-    }
 
     @Test
     public void registerUser(){
@@ -89,29 +65,4 @@ public class Registration{
         driver.findElement(By.id("password")).sendKeys(password);
         driver.findElement(By.xpath("//span[.='Login']/..")).click();
     }
-
-    @Test
-    public void findCategories(){
-        driver.findElement(By.xpath("//li[@id='Categories']")).click();
-        List<WebElement> categories = driver.findElements(By.xpath("//li[@id='Categories']//li//a"));
-        for (WebElement e : categories) {
-            System.out.println(e.getAttribute("text"));
-        }
-    }
-    @Test
-    public void findTopPicks(){
-        List<WebElement> topPicks = driver.findElements(By.xpath("//h2[@id='anchor-TopPicks']/../../..//div[@class='swiper-wrapper']//a/div"));
-        for (WebElement e : topPicks) {
-            System.out.println(e.getAttribute("id"));
-        }
-    }
-    @Test
-    public void findMovies(){
-        List<WebElement> movies = driver.findElements(By.xpath("//h2[@id='anchor-Movies']/../../..//div[@class='swiper-wrapper']//a//div"));
-        for (WebElement e : movies) {
-            System.out.println(e.getAttribute("id"));
-        }
-    }
-
-
 }
