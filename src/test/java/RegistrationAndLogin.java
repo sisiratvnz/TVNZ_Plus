@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.Arrays;
@@ -56,13 +58,59 @@ public class RegistrationAndLogin extends ConnectDriver {
         }
     }
     @Test
-    public void logIn() throws InterruptedException {
+    public void logIn() {
 //        Thread.sleep(3000);
         driver.findElement(By.xpath("//a[text()='Login']")).click();
-//        Assertions.assertTrue(driver.findElement(By.xpath("//a[text()='Login']")).isDisplayed(),"Login button not available");
-//        Thread.sleep(3000);
         driver.findElement(By.id("email")).sendKeys(email);
         driver.findElement(By.id("password")).sendKeys(password);
         driver.findElement(By.xpath("//span[.='Login']/..")).click();
+    }
+
+    @Test
+    public void jsLogin() throws InterruptedException {
+
+        try {
+            WebElement loginLink = driver.findElement(By.xpath("//a[text()='Login']"));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].click();", loginLink);
+
+            WebElement emailField = driver.findElement(By.xpath("//input[@id='email']"));
+            String emailText = "assignment@grr.la";
+            emailField.click();
+            ((JavascriptExecutor) driver).executeScript("arguments[0].value='"+ emailText +"';", emailField);
+            Thread.sleep(2000);
+            //js.executeScript("document.getElementById('email').value='assignment@grr.la';");
+            WebElement passField = driver.findElement(By.xpath("//input[@id='password']"));
+            String passText = "test1234";
+            passField.click();
+            ((JavascriptExecutor) driver).executeScript("arguments[0].value='"+ passText +"';", passField);
+            Thread.sleep(2000);
+            //js.executeScript("document.getElementById('password').value='test1234';");
+            WebElement loginButton = driver.findElement(By.xpath("//button[.='Login']"));
+            wait.until(ExpectedConditions.elementToBeClickable(loginButton));
+            js.executeScript("arguments[0].click();", loginButton);
+
+
+            //WebElement letsGoButton = driver.findElement(By.xpath("//button[starts-with(text(),'Let')]"));
+            //wait.until(ExpectedConditions.elementToBeClickable(letsGoButton));
+            //js.executeScript("arguments[0].click();", letsGoButton);
+            //letsGoButton.click();
+            WebElement profile = driver.findElement(By.xpath("//ul[@class='choose-profile__avatars']/li[1]/a[@href='#']//img[@alt='test']"));
+            wait.until(ExpectedConditions.elementToBeClickable(profile));
+            profile.click();
+
+            wait.until(ExpectedConditions.alertIsPresent());
+            Alert alert = driver.switchTo().alert();
+            System.out.println(alert.getText());
+            alert.accept();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+
     }
 }
