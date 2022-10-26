@@ -1,4 +1,4 @@
-package org.example;
+package nz.co.tvnz;
 
 import java.io.FileInputStream;
 import java.util.Properties;

@@ -1,4 +1,4 @@
-package org.example;
+package examples;
 
 import org.asynchttpclient.util.DateUtils;
 

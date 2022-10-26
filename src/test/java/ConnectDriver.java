@@ -1,6 +1,5 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.example.GlobalPropertyConfig;
-import org.example.PropertiesHandler;
+import nz.co.tvnz.GlobalPropertyConfig;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.JavascriptExecutor;
@@ -9,7 +8,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.Properties;
 
 public class ConnectDriver {
     public WebDriver driver = null;

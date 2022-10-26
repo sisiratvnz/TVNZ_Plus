@@ -13,53 +13,6 @@ import java.util.List;
 
 public class Other extends ConnectDriver{
 
-    WebDriver drivers = null;
-    @Test
-    public void getTableData(){
-        WebDriverManager.chromedriver().setup();
-        drivers= new ChromeDriver();
-        drivers.navigate().to("https://demo.guru99.com/test/newtours/");
-        List<WebElement> list =  drivers.findElements(By.xpath("//table[@width = '270']//td[1]"));
-        for (WebElement e : list) {
-            System.out.println(e.getText());
-        }
-        drivers.close();
-        drivers.quit();
-    }
-
-    //Search for cars in GoSee cars
-    @Test
-    public void searchCarsInGoSee() throws InterruptedException {
-
-        //Actions builder = new Actions(driver);
-        WebElement pickupLocation = driver.findElement(By.xpath("//input[@id='pickup_location']"));
-        pickupLocation.sendKeys(" Auckland");
-        Thread.sleep(2000);
-        pickupLocation.sendKeys(Keys.ARROW_DOWN);
-        pickupLocation.sendKeys(Keys.ENTER);
-
-        driver.findElement(By.id("pickupDateField")).click();
-
-        WebElement pick = driver.findElement(By.xpath("//div[.='November 2022']/..//td[contains(@aria-label,'10')]"));
-
-
-        WebElement pickupDate = driver.findElement(By.xpath("//div[.='"+getPickupMonth()+" "+getYear()+"']//..//tr[1]//td[3]"));
-        //builder.moveToElement(startDate).build().perform();
-        pickupDate.click();
-        driver.findElement(By.xpath("//button[text()='Confirm']")).click();
-
-        driver.findElement(By.id("dropoffDateField")).click();
-        WebElement dropOffDate = driver.findElement(By.xpath("//div[.='"+getDropOffMonth()+" "+getYear()+"']/..//tr[5]//td[4]"));
-        //builder.moveToElement(endDate).build().perform();
-        dropOffDate.click();
-        driver.findElement(By.xpath("//button[text()='Confirm']")).click();
-
-        driver.findElement(By.id("search-cars-btn")).click();
-        Assertions.assertNotNull(driver.findElement(By.xpath("//div[@class='progress search']")));
-        Assertions.assertNotNull(driver.findElement(By.xpath("//ul[@class='resultsGroup' and @id='desktop-results']")));
-        System.out.println("Cars search working...");
-
-    }
 
     public static String getPickupMonth(){
         String[] monthName = {"January", "February",
@@ -92,4 +45,48 @@ public class Other extends ConnectDriver{
         System.out.println(year);
         return year;
     }
+
+    @Test
+    public void getTableData(){
+        List<WebElement> list =  driver.findElements(By.xpath("//table[@width = '270']//td[1]"));
+        for (WebElement e : list) {
+            System.out.println(e.getText());
+        }
+    }
+
+    //Search for cars in GoSee cars
+    @Test
+    public void searchCarsInGoSee() throws InterruptedException {
+
+        //Actions builder = new Actions(driver);
+        WebElement pickupLocation = driver.findElement(By.xpath("//input[@id='pickup_location']"));
+        pickupLocation.sendKeys(" Auckland");
+        Thread.sleep(2000);
+        pickupLocation.sendKeys(Keys.ARROW_DOWN);
+        pickupLocation.sendKeys(Keys.ENTER);
+
+        driver.findElement(By.id("pickupDateField")).click();
+
+        //WebElement pick = driver.findElement(By.xpath("//div[.='November 2022']/..//td[contains(@aria-label,'10')]"));
+
+
+        WebElement pickupDate = driver.findElement(By.xpath("//div[.='"+getPickupMonth()+" "+getYear()+"']//..//tr[1]//td[3]"));
+        //builder.moveToElement(startDate).build().perform();
+        pickupDate.click();
+        driver.findElement(By.xpath("//button[text()='Confirm']")).click();
+
+        driver.findElement(By.id("dropoffDateField")).click();
+        WebElement dropOffDate = driver.findElement(By.xpath("//div[.='"+getDropOffMonth()+" "+getYear()+"']/..//tr[5]//td[4]"));
+        //builder.moveToElement(endDate).build().perform();
+        dropOffDate.click();
+        driver.findElement(By.xpath("//button[text()='Confirm']")).click();
+
+        driver.findElement(By.id("search-cars-btn")).click();
+        Assertions.assertNotNull(driver.findElement(By.xpath("//div[@class='progress search']")));
+        Assertions.assertNotNull(driver.findElement(By.xpath("//ul[@class='resultsGroup' and @id='desktop-results']")));
+        System.out.println("Cars search working...");
+
+    }
+
+
 }

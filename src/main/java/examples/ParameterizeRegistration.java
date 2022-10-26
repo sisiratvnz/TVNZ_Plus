@@ -1,4 +1,4 @@
-package org.example;
+package examples;
 
 import dev.failsafe.internal.util.Assert;
 import io.github.bonigarcia.wdm.WebDriverManager;

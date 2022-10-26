@@ -1,4 +1,4 @@
-package org.example;
+package nz.co.tvnz;
 
 import java.util.Properties;
 
