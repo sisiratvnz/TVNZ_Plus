@@ -21,6 +21,9 @@ public class GlobalPropertyConfig {
             case "dev":
                 url = getGlobalProperties().getProperty("devurl");
                 break;
+            case "other":
+                url = getGlobalProperties().getProperty("otherurl");
+                break;
             default:
                 url = getGlobalProperties().getProperty("localhost");
         }

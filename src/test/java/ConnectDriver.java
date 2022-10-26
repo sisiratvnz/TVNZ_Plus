@@ -18,7 +18,8 @@ public class ConnectDriver {
     public void connectDriver(){
         WebDriverManager.chromedriver().setup();
         driver= new ChromeDriver();
-        driver.navigate().to(GlobalPropertyConfig.getURL());
+        driver.get(GlobalPropertyConfig.getURL());
+        //driver.navigate().to(GlobalPropertyConfig.getURL());
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         //driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -33,4 +34,5 @@ public class ConnectDriver {
     public void waiForPageLoad(){
         new WebDriverWait(driver, Duration.ofSeconds(20)).until(webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
     }
+
 }

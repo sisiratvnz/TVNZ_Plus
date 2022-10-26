@@ -109,8 +109,6 @@ public class RegistrationAndLogin extends ConnectDriver {
             e.printStackTrace();
         }
 
-
-
-
     }
+
 }

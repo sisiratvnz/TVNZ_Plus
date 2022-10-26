@@ -5,6 +5,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -227,4 +228,48 @@ public class Home extends ConnectDriver {
         alert.accept();
 
     }
+
+    //Custom sync
+    @Test
+    public void  customSyncTest(){
+
+    }
+    @Test
+    public void customSyncWithCountTest(){
+        waiForPageLoad();
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(20));
+        wait.until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver d){
+                return d.findElements(By.xpath("//h2[@id='anchor-Movies']/../../..//div[@class='swiper-wrapper']//a/div")).size()<10;
+            }
+        });
+    }
+
+    @Test
+    public void fluentWaitWithPredicateTest(){
+
+    }
+
+    @Test
+    public void scrollToBottomForNewsElement() throws IOException, InterruptedException {
+        Actions builder = new Actions(driver);
+        builder.scrollToElement(driver.findElement(By.xpath("//a[text()='News']"))).build().perform();
+        Thread.sleep(30000);
+
+    }
+    @Test
+    public void scrollToHowToWatchTile(){
+        Actions builder = new Actions(driver);
+        builder.scrollToElement(driver.findElement(By.xpath("//h4[.='How to watch']/../.."))).build().perform();
+    }
+
+    @Test
+    public void scrollToBottomWithJS() throws InterruptedException {
+//        Actions builder = new Actions(driver);
+//        builder.scrollToElement(driver.findElement(By.xpath("//h4[.='How to watch']/../.."))).build().perform();
+        ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        Thread.sleep(3000);
+    }
+
+
 }
