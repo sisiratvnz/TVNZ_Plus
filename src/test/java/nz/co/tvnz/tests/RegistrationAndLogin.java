@@ -1,3 +1,6 @@
+package nz.co.tvnz.tests;
+
+import nz.co.tvnz.connect.ConnectDriver;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;

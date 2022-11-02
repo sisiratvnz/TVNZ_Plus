@@ -1,6 +1,10 @@
-import org.junit.jupiter.api.Test;
+package nz.co.tvnz.tests;
 
-public class Shows extends ConnectDriver {
+import nz.co.tvnz.BaseTest;
+import org.junit.jupiter.api.Test;
+import nz.co.tvnz.tests.RegistrationAndLogin;
+
+public class Shows extends BaseTest {
     @Test
     public void loadShow() {
         RegistrationAndLogin registrationAndLogin = new RegistrationAndLogin();
